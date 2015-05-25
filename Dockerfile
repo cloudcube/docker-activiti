@@ -2,7 +2,7 @@
 # Ubuntu 14.04 with activiti Dockerfile
 #
 # Pull base image.
-FROM dockerfile/java
+FROM java:8
 MAINTAINER Frank Wang "support@bpmunion.com"
 
 EXPOSE 8080
