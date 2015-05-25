@@ -135,6 +135,9 @@ Below is the complete list of available options that can be used to customize yo
 
 - **TOMCAT_ADMIN_USER**: Tomcat admin user name. Defaults to `admin`.
 - **TOMCAT_ADMIN_PASSWORD**: Tomcat admin user password. Defaults to `admin`.
+- **CREATE_DEMO_USERS_STATUS**: Activiti Engine create demo users. Defaults to `true`.  
+- **CREATE_DEMO_DEFINITIONS_STATUS**: Activiti Engine create demo definitions. Defaults to `true`  
+- **CREATE_DEMO_MODELS_STATUS**: Activiti Engine create demo models. Defaults to `true`  
 - **DB_HOST**: The database server hostname. Defaults to ``.
 - **DB_PORT**: The database server port. Defaults to `3306`.
 - **DB_NAME**: The database database name. Defaults to ``.

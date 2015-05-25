@@ -16,6 +16,11 @@ DB_NAME=${DB_NAME:-}
 DB_USER=${DB_USER:-}
 DB_PASS=${DB_PASS:-}
 
+# Activiti Engine properties
+CREATE_DEMO_USERS_STATUS=${CREATE_DEMO_USERS_STATUS:-true}
+CREATE_DEMO_DEFINITIONS_STATUS=${CREATE_DEMO_DEFINITIONS_STATUS:-true}
+CREATE_DEMO_MODELS_STATUS=${CREATE_DEMO_MODELS_STATUS:-true}
+
 # is a mysql database linked?
 # requires that the mysql container have exposed
 # port 3306 and respectively.
@@ -79,8 +84,24 @@ case "${DB_TYPE}" in
     sed 's/{{DB_USER}}/'"${DB_USER}"'/g' -i /assets/config/db.properties
     sed 's/{{DB_PASS}}/'"${DB_PASS}"'/g' -i /assets/config/db.properties
     cp -f /assets/config/db.properties /opt/tomcat/webapps/activiti-rest/WEB-INF/classes
-    cp -f /assets/config/db.properties /opt/tomcat/webapps/activiti-explorer/WEB-INF/classes
+    #cp -f /assets/config/db.properties /opt/tomcat/webapps/activiti-explorer/WEB-INF/classes
     ;;
 esac
+
+# Activiti Engine Properties
+if [ -n "${CREATE_DEMO_USERS_STATUS}" ]; then
+    sed 's/{{CREATE_DEMO_USERS_STATUS}}/'"${CREATE_DEMO_USERS_STATUS}"'/g' -i /assets/config/engine.properties
+fi
+
+if [ -n "${CREATE_DEMO_DEFINITIONS_STATUS}" ]; then
+    sed 's/{{CREATE_DEMO_DEFINITIONS_STATUS}}/'"${CREATE_DEMO_DEFINITIONS_STATUS}"'/g' -i /assets/config/engine.properties
+fi
+
+
+if [ -n "${CREATE_DEMO_MODELS_STATUS}" ]; then
+    sed 's/{{CREATE_DEMO_MODELS_STATUS}}/'"${CREATE_DEMO_MODELS_STATUS}"'/g' -i /assets/config/engine.properties
+fi
+
+cp -f /assets/config/engine.properties /opt/tomcat/webapps/activiti-rest/WEB-INF/classes
 
 /opt/tomcat/bin/catalina.sh run
