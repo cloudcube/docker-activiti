@@ -10,7 +10,7 @@
 
 # Introduction
 
-Dockerfile to build an [Activiti BPM](#http://www.activiti.org/) container image.
+Dockerfile to build an [Activiti BPM](#http://www.activiti.org/) REST API container image.
 
 ## Version
 
@@ -21,19 +21,13 @@ Current Version: **current**
 Pull the latest version of the image from the docker index. This is the recommended method of installation as it is easier to update image in the future. These builds are performed by the **Docker Trusted Build** service.
 
 ```bash
-docker pull eternnoir/activiti:latest
-```
-
-Since version `latest`, the image builds are being tagged. You can now pull a particular version of activiti by specifying the version number. For example,
-
-```bash
-docker pull eternnoir/activiti:5.16.4
+docker pull cloudcube/activiti
 ```
 
 Alternately you can build the image yourself.
 
 ```bash
-git clone https://github.com/eternnoir/activiti.git
+git clone https://github.com/cloudcube/activiti.git
 cd activiti
 docker build --tag="$USER/activiti" .
 ```
@@ -47,7 +41,7 @@ docker run --name='activiti' -it --rm \
 -p 8080:8080 \
 -v /var/run/docker.sock:/run/docker.sock \
 -v $(which docker):/bin/docker \
-eternnoir/activiti:latest
+cloudcube/activiti
 ```
 
 Point your browser to `http://localhost:8080` and login using the default username and password:
@@ -75,7 +69,8 @@ Before you start the Activiti image create user and database for activiti.
 ```sql
 CREATE USER 'activiti'@'%.%.%.%' IDENTIFIED BY 'password';
 CREATE DATABASE IF NOT EXISTS `activiti_production` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_unicode_ci`;
-GRANT ALL PRIVILEGES ON `activiti_production`.* TO 'activiti'@'%.%.%.%';
+GRANT ALL PRIVILEGES ON `activiti_production`.* TO 'activiti'@'%.%.%.%';  
+flush privileges;
 ```
 
 We are now ready to start the Activiti application.
@@ -85,7 +80,7 @@ We are now ready to start the Activiti application.
 ```bash
 docker run --name=activiti -d \
   -e 'DB_HOST=192.0.2.1’ -e 'DB_NAME=activiti_production' -e 'DB_USER=activiti’ -e 'DB_PASS=password' \
-eternnoir/activiti:latest
+cloudcube/activiti
 ```
 
 #### Linking to MySQL Container
@@ -126,7 +121,7 @@ We are now ready to start the Activiti application.
 
 ```bash
 docker run --name=activiti -d --link mysql:mysql \
-  eternnoir/activiti:latest
+  cloudcube/activiti
 ```
 
 The image will automatically fetch the `DB_NAME`, `DB_USER` and `DB_PASS` variables from the mysql container using the magic of docker links and works with the following images:

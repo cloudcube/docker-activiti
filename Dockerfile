@@ -3,12 +3,12 @@
 #
 # Pull base image.
 FROM dockerfile/java
-MAINTAINER Frank Wang "eternnoir@gmail.com"
+MAINTAINER Frank Wang "support@bpmunion.com"
 
 EXPOSE 8080
 
 ENV TOMCAT_VERSION 8.0.14
-ENV ACTIVITI_VERSION 5.16.4
+ENV ACTIVITI_VERSION 5.17.0
 ENV MYSQL_CONNECTOR_JAVA_VERSION 5.1.33
 
 RUN wget http://archive.apache.org/dist/tomcat/tomcat-8/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz -O /tmp/catalina.tar.gz
@@ -26,7 +26,6 @@ RUN rm -rf /opt/tomcat/webapps/examples
 RUN rm -rf /opt/tomcat/webapps/docs
 
 # To install jar files first we need to deploy war files manually
-RUN unzip /opt/activiti/activiti-${ACTIVITI_VERSION}/wars/activiti-explorer.war -d /opt/tomcat/webapps/activiti-explorer
 RUN unzip /opt/activiti/activiti-${ACTIVITI_VERSION}/wars/activiti-rest.war -d /opt/tomcat/webapps/activiti-rest
 
 # Add mysql connector to application
