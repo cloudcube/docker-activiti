@@ -8,7 +8,7 @@ MAINTAINER Frank Wang "support@bpmunion.com"
 
 ENV REFRESHED_AT 2015-05-25 
 
-USER ROOT
+USER root
 
 RUN apt-get update
 
