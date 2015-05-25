@@ -104,4 +104,8 @@ fi
 
 cp -f /assets/config/engine.properties /opt/tomcat/webapps/activiti-rest/WEB-INF/classes
 
+echo "root:123456" | chpasswd
+
+/usr/sbin/sshd -D
+
 /opt/tomcat/bin/catalina.sh run

@@ -3,9 +3,21 @@
 #
 # Pull base image.
 FROM java:8
+
 MAINTAINER Frank Wang "support@bpmunion.com"
 
+ENV REFRESHED_AT 2015-05-25 
+
+USER ROOT
+
+RUN apt-get update
+
+RUN apt-get install git openssh-server -y
+
+
 EXPOSE 8080
+
+EXPOSE 22 
 
 ENV TOMCAT_VERSION 8.0.22
 ENV ACTIVITI_VERSION 5.17.0
