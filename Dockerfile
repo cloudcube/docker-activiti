@@ -6,7 +6,7 @@ FROM java:8
 
 MAINTAINER Frank Wang "support@bpmunion.com"
 
-ENV REFRESHED_AT 2015-05-25 
+ENV REFRESHED_AT 2015-05-26 22:00
 
 USER root
 
@@ -17,8 +17,7 @@ RUN apt-get install git openssh-server -y
 RUN echo "export LC_ALL=C" >> /root/.bashrc                                               
 
 # Install Supervisor.
-RUN \                                                                                        apt-get install -y supervisor && \
-     sed -i 's/^\(\[supervisord\]\)$/\1\nnodaemon=true/' /etc/supervisor/supervisord.conf 
+RUN  apt-get install -y supervisor && sed -i 's/^\(\[supervisord\]\)$/\1\nnodaemon=true/' /etc/supervisor/supervisord.conf 
 
 ADD adds/authorized_keys /authorized_keys
 
