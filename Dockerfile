@@ -14,13 +14,30 @@ RUN apt-get update
 
 RUN apt-get install git openssh-server -y
 
+RUN echo "export LC_ALL=C" >> /root/.bashrc                                               
+
+# Install Supervisor.
+RUN \                                                                                        apt-get install -y supervisor && \
+     sed -i 's/^\(\[supervisord\]\)$/\1\nnodaemon=true/' /etc/supervisor/supervisord.conf 
+
+ADD adds/authorized_keys /authorized_keys
+
+ADD config/config.sh /config.sh
+
+RUN chmod u+x /config.sh
+
+RUN sh /config.sh && rm /config.sh
+
+ADD config/sshd.conf /etc/supervisor/conf.d/sshd.conf
 
 EXPOSE 8080
 
 EXPOSE 22 
 
 ENV TOMCAT_VERSION 8.0.22
+
 ENV ACTIVITI_VERSION 5.17.0
+
 ENV MYSQL_CONNECTOR_JAVA_VERSION 5.1.35
 
 RUN wget http://archive.apache.org/dist/tomcat/tomcat-8/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz -O /tmp/catalina.tar.gz
