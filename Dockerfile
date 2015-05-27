@@ -29,6 +29,8 @@ RUN sh /config.sh && rm /config.sh
 
 ADD config/sshd.conf /etc/supervisor/conf.d/sshd.conf
 
+ADD config/tomcat.conf /etc/supervisor/conf.d/tomcat.conf
+
 EXPOSE 8080
 
 EXPOSE 22 
