@@ -181,7 +181,8 @@ sudo docker run --name=activiti -d \
 -e 'DB_PASS=111111' \
 -p 18080:8080 \
 -p 12222:22 \
-cloudcube/activiti```
+cloudcube/activiti
+```
 
 
 manager activiti rest  
@@ -195,14 +196,13 @@ http://<ip>:<18080>/activiti-rest/service/management/properties
 
 #Manager
 if you want manger this container,you can use ssh login.  
+
 ```bash 
 git clone https://github.com/cloudcube/docker-activiti.git  
 cd docker-activiti  
 sudo chmod 0600 auth/id_rsa_activiti_docker  
 ssh -i auth/id_rsa_activiti_docker -p 12222 root@<ip> 
 ```
-
-
 
 # Upgrading
 
