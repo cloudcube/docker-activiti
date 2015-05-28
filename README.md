@@ -8,7 +8,8 @@
 - [Manager](#manager)
 - [Configuration](#configuration)
   - [Database](#database)
-  - [Available Configuration Parameters](#available-configuration-parameters)
+  - [Available Configuration Parameters](#available-configuration-parameters)  
+- [Contact](#contact)
 
 # Introduction
 
@@ -214,4 +215,9 @@ TODO
 * http://tomcat.apache.org/
 * http://dev.mysql.com/downloads/connector/j/5.1.html
 * https://github.com/jpetazzo/nsenter
-* https://jpetazzo.github.io/2014/03/23/lxc-attach-nsinit-nsenter-docker-0-9/
+* https://jpetazzo.github.io/2014/03/23/lxc-attach-nsinit-nsenter-docker-0-9/  
+
+# Contact    
+微信号:`bpmunion`                                                                                                                                                         
+<image src="http://7xj0oc.com1.z0.glb.clouddn.com/qrcode_for_bpmunion_8.jpg">                                                                                                        
+微博号:`企业流程管理`
