@@ -4,6 +4,8 @@
     - [Changelog](Changelog.md)
 - [Installation](#installation)
 - [Quickstart](#quickstart)
+- [Usage](#usage)
+- [Manager](#manager)
 - [Configuration](#configuration)
   - [Database](#database)
   - [Available Configuration Parameters](#available-configuration-parameters)
@@ -27,7 +29,7 @@ docker pull cloudcube/activiti
 Alternately you can build the image yourself.
 
 ```bash
-git clone https://github.com/cloudcube/activiti.git
+git clone https://github.com/cloudcube/docker-activiti.git
 cd activiti
 docker build --tag="$USER/activiti" .
 ```
@@ -44,10 +46,10 @@ docker run --name='activiti' -it --rm \
 cloudcube/activiti
 ```
 
-Point your browser to `http://localhost:8080` and login using the default username and password:
+Point your browser to `http://<ip>:8080/manager` and login using the default username and password:
 
-* username: **kermit**
-* password: **kermit**
+* username: **admin**
+* password: **admin**
 
 You should now have the Activiti application up and ready for testing. If you want to use this image in production the please read on.
 
@@ -67,10 +69,10 @@ The image can be configured to use an external MySQL database instead of startin
 Before you start the Activiti image create user and database for activiti.
 
 ```sql
-CREATE USER 'activiti'@'%.%.%.%' IDENTIFIED BY 'password';
-CREATE DATABASE IF NOT EXISTS `activiti_production` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_unicode_ci`;
+CREATE USER 'activiti'@'%.%.%.%' IDENTIFIED BY 'password';  
+CREATE DATABASE IF NOT EXISTS `activiti_production` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_unicode_ci`;  
 GRANT ALL PRIVILEGES ON `activiti_production`.* TO 'activiti'@'%.%.%.%';  
-flush privileges;
+flush privileges;  
 ```
 
 We are now ready to start the Activiti application.
@@ -167,6 +169,39 @@ sudo docker-enter activiti
 For more information refer https://github.com/jpetazzo/nsenter
 
 Another tool named `nsinit` can also be used for the same purpose. Please refer https://jpetazzo.github.io/2014/03/23/lxc-attach-nsinit-nsenter-docker-0-9/ for more information.
+
+#Usage  
+you can use below command start activiti 
+
+```bash
+sudo docker run --name=activiti -d \
+-e 'DB_NAME=activitidemo' \
+-e 'DB_USER=activitidemo' \
+-e 'DB_PASS=111111' \
+-p 18080:8080 \
+-p 12222:22 \
+cloudcube/activiti```
+
+
+manager activiti rest  
+http://<ip>:<18080>/manager   
+请求activiti rest  
+http://<ip>:<18080>/activiti-rest/service/management/properties  
+用户名：  
+**kermit**   
+密码：   
+**kermit**  
+
+#Manager
+if you want manger this container,you can use ssh login.  
+```bash 
+git clone https://github.com/cloudcube/docker-activiti.git  
+cd docker-activiti  
+sudo chmod 0600 auth/id_rsa_activiti_docker  
+ssh -i auth/id_rsa_activiti_docker -p 12222 root@<ip> 
+```
+
+
 
 # Upgrading
 
